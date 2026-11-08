@@ -1,0 +1,33 @@
+# Nombre de la aplicación Spring
+spring:
+  application:
+    name: catalogo-plantas
+
+# Context path de la aplicación
+server:
+  servlet:
+    context-path: /catalogo-plantas
+
+# H2 Database Configuration (en memoria para pruebas)
+  datasource:
+    url: jdbc:h2:mem:botanica_db;DB_CLOSE_DELAY=-1;NON_KEYWORDS=KEY,VALUE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+
+# JPA/Hibernate
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# Actuator & Observability
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
