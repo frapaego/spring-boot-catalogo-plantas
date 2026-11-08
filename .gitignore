@@ -2,7 +2,7 @@
 /.idea/
 /.gradle/
 /.github/
-/.vs_code/
+/.vs_code
 /build/
 /target/
 /out/
