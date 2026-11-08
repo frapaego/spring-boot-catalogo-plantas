@@ -1,0 +1,15 @@
+/node_modules/
+/.idea/
+/.gradle/
+/.github/
+/.vs_code/
+/build/
+/target/
+/out/
+/target/
+.DS_Store
+/.settings/
+/.classpath
+/.project
+/bin/
+/.vscode
