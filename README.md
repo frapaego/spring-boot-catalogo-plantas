@@ -40,6 +40,8 @@ El context path configurado es `/catalogo-plantas` y la base de la API es `/api/
 | Método | Ruta | Descripción | Respuesta esperada |
 |---|---|---|---|
 | `POST` | `/api/v1/plantas` | Crea una planta | `201 Created` |
+| `PUT` | `/api/v1/plantas/{id}` | Actualiza una planta existente | `200 OK` |
+| `DELETE` | `/api/v1/plantas/{id}` | Elimina una planta existente | `204 No Content` |
 | `GET` | `/api/v1/plantas/{id}` | Consulta una planta por ID | `200 OK` |
 | `GET` | `/api/v1/plantas` | Lista las plantas | `200 OK` |
 
@@ -119,4 +121,4 @@ src/
 
 ## Alcance actual
 
-La API implementa creación, consulta por ID y listado. No incluye todavía actualización ni eliminación.
+La API implementa creación, consulta, listado, actualización completa mediante `PUT` y eliminación mediante `DELETE`. Actualizar una planta mantiene su ID y fecha de alta originales. Las operaciones de actualización y eliminación responden `404 Not Found` si el ID no existe.
