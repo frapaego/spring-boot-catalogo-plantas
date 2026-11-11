@@ -10,6 +10,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Pruebas de persistencia JPA para las operaciones CRUD de plantas.
+ */
 @DataJpaTest
 class PlantaRepositoryTest {
 
@@ -21,6 +24,9 @@ class PlantaRepositoryTest {
 
     private Planta plantaEjemplo;
 
+    /**
+     * Prepara una entidad válida antes de cada prueba.
+     */
     @BeforeEach
     void setUp() {
         plantaEjemplo = Planta.builder()
@@ -32,6 +38,9 @@ class PlantaRepositoryTest {
                 .build();
     }
 
+    /**
+     * Comprueba que una planta nueva se persiste y recibe un identificador.
+     */
     @Test
     @DisplayName("Debe guardar una planta correctamente")
     void debeGuardarPlanta() {
@@ -43,6 +52,9 @@ class PlantaRepositoryTest {
         assertThat(guardada.getNombreCientifico()).isEqualTo("Solanum lycopersicum");
     }
 
+    /**
+     * Comprueba que una planta persistida puede recuperarse por su ID.
+     */
     @Test
     @DisplayName("Debe encontrar una planta por su ID")
     void debeEncontrarPlantaPorId() {
@@ -56,6 +68,9 @@ class PlantaRepositoryTest {
         assertThat(encontrada.getId()).isEqualTo(guardada.getId());
     }
 
+    /**
+     * Comprueba que el repositorio devuelve las plantas registradas.
+     */
     @Test
     @DisplayName("Debe listar todas las plantas")
     void debeListarTodasLasPlantas() {
@@ -67,6 +82,9 @@ class PlantaRepositoryTest {
         assertThat(plantas).hasSizeGreaterThanOrEqualTo(1);
     }
 
+    /**
+     * Comprueba que los cambios en una planta se guardan.
+     */
     @Test
     @DisplayName("Debe actualizar una planta existente")
     void debeActualizarPlanta() {
@@ -78,5 +96,20 @@ class PlantaRepositoryTest {
 
         assertThat(actualizada.getFrecuenciaRiegoDias()).isEqualTo(5);
         assertThat(actualizada.getNombreComun()).isEqualTo("Tomate Cherry");
+    }
+
+    /**
+     * Comprueba que una planta persistida puede eliminarse.
+     */
+    @Test
+    @DisplayName("Debe eliminar una planta existente")
+    void debeEliminarPlanta() {
+        Planta guardada = plantaRepository.save(plantaEjemplo);
+
+        plantaRepository.delete(guardada);
+        entityManager.flush();
+        entityManager.clear();
+
+        assertThat(plantaRepository.findById(guardada.getId())).isEmpty();
     }
 }

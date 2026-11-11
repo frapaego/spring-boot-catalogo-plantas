@@ -1,19 +1,12 @@
 {
     "configurations": [
-        {
+        
             "type": "java",
-            "name": "CatalogoPlantasApplication",
-            "request": "launch",
-            "mainClass": "com.botanica.catalogo.CatalogoPlantasApplication",
-            "projectName": "aureliax"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-CatalogoSpringBootApplication<aureliax>",
+            "name": "Spring Boot-CatalogoPlantasApplication<spring-boot-catalogo-plantas>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.botanica.catalogo.CatalogoSpringBootApplication",
-            "projectName": "aureliax",
+            "mainClass": "com.botanica.catalogo.CatalogoPlantasApplication",
+            "projectName": "spring-boot-catalogo-plantas",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

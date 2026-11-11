@@ -1,4 +1,4 @@
-package com.botanica.catalogo.controller;
+package com.botanica.catalogo.handler;
 
 import com.botanica.catalogo.dto.ErrorResponseDTO;
 import com.botanica.catalogo.exceptions.PlantaNotFoundException;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +25,11 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     /**
-     * Maneja la validación de argumentos no válidos en los DTOs.
-     * Mapea cada campo que falló con su respectivo mensaje de error.
+     * Convierte errores de validación de cuerpos de solicitud en HTTP 400.
+     *
+     * @param ex excepción de validación producida por Spring MVC
+     * @param request solicitud que originó el error
+     * @return respuesta de error HTTP 400
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleMethodArgumentNotValidException(
@@ -50,7 +52,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Maneja la excepción cuando no se encuentra una planta por su ID.
+     * Convierte una búsqueda fallida de planta en HTTP 404.
+     *
+     * @param ex excepción con el identificador no encontrado
+     * @param request solicitud que originó el error
+     * @return respuesta de error HTTP 404
      */
     @ExceptionHandler(PlantaNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handlePlantaNotFoundException(
@@ -68,7 +74,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Maneja los errores de validación de constraints de Bean Validation.
+     * Convierte violaciones de Bean Validation en HTTP 400.
+     *
+     * @param ex excepción con las restricciones incumplidas
+     * @param request solicitud que originó el error
+     * @return respuesta de error HTTP 400
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ErrorResponseDTO> handleConstraintViolationException(
@@ -91,8 +101,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Maneja todas las demás excepciones no controladas.
-     * NO expone detalles internos del error al cliente.
+     * Convierte excepciones no controladas en una respuesta genérica HTTP 500.
+     *
+     * @param ex excepción no controlada
+     * @param request solicitud que originó el error
+     * @return respuesta genérica de error HTTP 500
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGenericException(
