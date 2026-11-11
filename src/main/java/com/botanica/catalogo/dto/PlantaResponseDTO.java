@@ -3,6 +3,16 @@ package com.botanica.catalogo.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 
+/**
+ * Representación de una planta devuelta por la API.
+ *
+ * @param id identificador único de la planta
+ * @param nombreComun nombre común de la planta
+ * @param nombreCientifico nombre científico de la planta
+ * @param frecuenciaRiegoDias frecuencia de riego expresada en días
+ * @param fechaAlta fecha en que se registró la planta
+ * @param ultimoRiego fecha del último riego registrado
+ */
 @Schema(name = "PlantaResponseDTO", description = "DTO para respuesta de la planta")
 public record PlantaResponseDTO(
     @Schema(description = "ID de la planta", example = "1")
@@ -24,4 +34,3 @@ public record PlantaResponseDTO(
     LocalDate ultimoRiego
 ) {
 }
-
